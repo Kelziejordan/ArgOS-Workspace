@@ -11,7 +11,7 @@
     "test:argcore-runtime": "node tests/contracts/argcore-runtime-dependency.contract.test.mjs"
   },
   "dependencies": {
-    "@arg/argcore": "git+https://github.com/Kelziejordan/ArgCore.git#3480e8e076e64c0d9279e67d2c873cb719b10be0",
+    "@arg/argcore": "https://github.com/Kelziejordan/ArgCore/archive/3480e8e076e64c0d9279e67d2c873cb719b10be0.tar.gz",
     "idb": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
