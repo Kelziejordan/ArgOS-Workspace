@@ -15,4 +15,5 @@ jobs:
           cache: npm
       - run: npm install
       - run: npm run test:argcore-adapter
+      - run: npm run test:argcore-runtime
       - run: npm run build
