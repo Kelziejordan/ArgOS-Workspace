@@ -1,44 +1,38 @@
-# ArgOS-Workspace
-My HTML build station 
 # ArgOS Workspace
 
-ArgOS Workspace is a local-first Progressive Web App for governed project execution. It is designed to help you track projects, save version snapshots, run validations, and keep working offline.
+ArgOS Workspace is the application layer built above ArgCore. It is a local-first, provider-neutral multi-intelligence workspace.
 
-## What it does
+## Primary interaction
 
-- Stores workspace data locally in IndexedDB.
-- Tracks project versions and validation records.
-- Supports offline use with a service worker.
-- Provides a PWA install prompt when the app is installable.
-- Uses a simple governed workflow for editing, saving, and validating project state.
+Four intelligence columns are visible simultaneously. Each column has an explicit participant control:
 
-## Current structure
+```text
+AI 1      AI 2      AI 3      AI 4
+[ON]      [ON]      [OFF]     [ON]
 
-- `src/App.jsx` — main workspace UI.
-- `src/main.jsx` — app entry point.
-- `src/sw-register.js` — service worker registration.
-- `src/components/PwaBanner.jsx` — install/update/offline banner.
-- `src/lib/storage.js` — IndexedDB storage layer.
-- `src/lib/writeQueue.js` — deduped save queue.
-- `vite.config.js` — Vite + PWA configuration.
+---------------------------------
+          USER CHAT
+---------------------------------
+```
 
-## Tech stack
+The user decides which participants receive the next message. `Select all` and `Clear` are convenience controls. The bottom composer spans the full workspace.
 
-- React
-- Vite
-- Vite PWA
-- IndexedDB
+## ArgOS workflow
 
-## Getting started
+`User goal -> selected intelligence -> parallel responses -> evidence -> explicit reconciliation -> governed next action`
 
-1. Clone the repository.
-2. Install dependencies.
-3. Run the app locally.
-4. Build for production.
-5. Deploy to GitHub Pages, Netlify, or another static host.
+No model response is treated as authoritative merely because it is present in a column. Reconciliation is an explicit second-stage operation that identifies agreement, disagreement, evidence quality, uncertainty, and what should be verified next.
 
-## Local development
+## Provider boundary
 
-```bash
-npm install
-npm run dev
+The browser never stores provider secrets. It calls the same-origin `/api/ai` gateway. Provider credentials and model identifiers are deployment environment variables. `/api/reconcile` performs an explicit synthesis pass using the configured ArgOS reconciler.
+
+## Local-first behavior
+
+Session state, participant selection, responses, and reconciliation records are stored in IndexedDB. If the application is offline, the UI preserves the task and can display a clearly labeled local fallback rather than pretending an unavailable provider answered.
+
+## Architecture
+
+ArgOS Workspace is not ArgCore. ArgCore supplies governance, authority, state, provenance, validation, recovery, observability, resource control, and provider interfaces. ArgOS owns model selection, multi-intelligence orchestration, evidence comparison, reconciliation, and user experience.
+
+Legacy Trading, LifeOS, InspectionOS, Discovery, and provider implementations are not imported into the workspace.
